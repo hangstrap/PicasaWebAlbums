@@ -1,0 +1,6 @@
+name: PicasaWebAlbums
+dependencies:
+  http: any
+  json_object: any
+dev_dependencies:
+  unittest: any
