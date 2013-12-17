@@ -19,7 +19,7 @@
       "type":"text"
    },
    "summary":{
-      "$t":"",
+      "$t":"Some sort of comment",
       "type":"text"
    },
    "content":{
