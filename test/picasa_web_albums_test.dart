@@ -11,7 +11,7 @@ void main(){
       Album album = new Album( getJsonForAlbum());
       expect( album.title, equals( "Tessa d\'Jappervilla"));
       expect( album.rights, equals( "public"));
-      expect( album.getAlumUri(), equals( "https://picasaweb.google.com/data/feed/api/user/101488109748928583216/albumid/5938894451891583841?alt=json"));
+      expect( album.getAlbumUri(), equals( "https://picasaweb.google.com/data/feed/api/user/101488109748928583216/albumid/5938894451891583841?alt=json"));
     });
     
     test( "should load photo from json", (){
@@ -45,9 +45,8 @@ void main(){
       Future< List<Album>> albumsFuture = user.albums();
       expect( albumsFuture.then( (albums)=> albums.first.title), completion( equals( 'Tessa d\'Jappervilla')));      
     });
-    test("", (){
-      user.albums().then( (albums) => albums.forEach( (album)=>print( "${album.title} ${album.rights}")));
-    });
+    
+    
   });
   
   

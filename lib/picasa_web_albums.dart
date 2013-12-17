@@ -23,10 +23,16 @@ class Album {
   String get title => json.title.$t;
   String get rights => json.rights.$t;
   
-  List<Photo> get photos => json.photos;
+  Future<List<Photo>> get photos{
+    
+    String url = getAlbumUri();
+    return http.get( url ).then( (response){
+      JsonObject json = new JsonObject.fromJsonString( response.body);      
+    });
+  }
     
   
-  String getAlumUri(){
+  String getAlbumUri(){
     List<JsonObject> links = json.link;
     JsonObject link = links.firstWhere( (JsonObject e)=> e.rel.startsWith( "http://schemas"));
     return link.href;
