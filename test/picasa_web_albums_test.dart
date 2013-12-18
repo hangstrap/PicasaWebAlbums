@@ -48,23 +48,48 @@ void main(){
       expect( albumsFuture.then( (albums)=> albums.first.title), completion( equals( 'Tessa d\'Jappervilla')));      
     });
     
-    test( "should return the photos in my first album correctly", (){
+    solo_test( "should return the photos in my first album correctly", (){
       User user = new User( "101488109748928583216");
       Future< List<Album>> albumsFuture = user.albums();
+//      
+//      albumsFuture.then( (albums){
+//        
+//          Album first = albums.first;
+//          Future< List<Photo>> photoFuture = first.photos;
+//          photoFuture.then( (photos) {
+//            
+//              photos.forEach( (photo)=> print( "${photo.title} ${photo.url}"));
+//              
+//              http.get( photos.first.url ).then( (response){ print( "downloaded ${response.contentLength} bytes");});
+//          });
+//      });
+//      
+//      user.albums().then( (albums)=>albums.first.photos).then( (photos) => print( "${photos.length}"));
+
       
-      albumsFuture.then( (albums){
+      void processAlbumList( List<Album> albums){
         
-          Album first = albums.first;
-          Future< List<Photo>> photoFuture = first.photos;
-          photoFuture.then( (photos) {
+        processAlbum( Album album){
+          print( album.title);
+          
+          processPhotoList( List<Photo> photos){
             
-              photos.forEach( (photo)=> print( "${photo.title} ${photo.url}"));
-              
-              http.get( photos.first.url ).then( (response){ print( "downloaded ${response.contentLength} bytes");});
-          });
-      });      
+            processPhoto(Photo photo){
+              print( "${album.title}  ${photo.title}");
+            }
+            
+            photos.forEach( processPhoto);
+          }
+          album.photos.then( processPhotoList);
+        }
+        albums.forEach( processAlbum);
+      }
+      
+      user.albums().then( processAlbumList);
+        
+
     });
-    
+   
   });
   
   
