@@ -5,7 +5,6 @@ library picasa_web_album;
  * An Ablum has a ser of Photos -> url for each album = https://picasaweb.google.com/data/feed/api/user/101488109748928583216/albumid/5938894451891583841?alt=json
  */
 
-import "dart:io";
 import "dart:async";
 import 'package:json_object/json_object.dart';
 import 'package:http/http.dart' as http;
@@ -16,7 +15,14 @@ class Photo{
   
   String get title => json.title.$t;
   String get summary => json.summary.$t;
-  String get url  => json.media$group.media$content[0].url;   
+  String url( {imgmax:'d'}){
+    if( imgmax=='d'){
+      return json.media$group.media$content[0].url;
+    }else{
+      String defaultUrl = url(); 
+      return defaultUrl.replaceFirst("/d", "/s${imgmax}");
+    }
+  }
 
 }
 
